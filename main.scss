@@ -1,0 +1,601 @@
+$background-color: black;
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "IBM Plex Mono", serif;
+  color: whiteSmoke; // Change text color to white smoke
+  user-select: none;
+  background-color: $background-color;
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 10%,
+    transparent 60%
+  );
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: contrast(120%) brightness(90%) sepia(10%);
+  overflow: hidden;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.full-screen {
+  display: flex;
+  height: 100vh !important;
+  width: 100vw !important;
+}
+.full-screen-index {
+  display: flex;
+  height: 100vh !important;
+  width: 100vw !important;
+  cursor: none;
+}
+
+.bottom-text-section {
+  margin-right: 50px;
+  display: flex;
+  align-items: end;
+  flex-direction: column;
+  max-width: 40vw;
+  margin-top: auto;
+  margin-bottom: 5vh;
+  margin-left: auto;
+  transition: margin-top 0.5s cubic-bezier(0.2, 0, 0.2, 1) !important;
+  color: whiteSmoke; // Ensure text in this section is white smoke
+}
+
+.title-image-cont {
+  width: 100px;
+}
+
+.title-image {
+  width: 100%;
+}
+
+.main-title {
+  font-weight: bold;
+  font-size: 45px;
+  color: whiteSmoke; // Update color
+}
+
+.title-tag {
+  font-weight: bold;
+  color: whiteSmoke; // Update color
+}
+
+.title-desc {
+  color: whiteSmoke; // Update to white smoke
+  margin-top: 10px;
+  text-align: end;
+}
+
+.gen-button {
+  background-color: whiteSmoke;
+  color: black; // Black text for contrast
+  width: fit-content;
+  padding: 7px;
+  border-radius: 10px;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+#cursor {
+  aspect-ratio: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.cursor-circle {
+  font-size: 70px;
+  color: whiteSmoke; // Update to white smoke
+  transform: translateY(-5px);
+  z-index: 9999 !important;
+}
+
+.cursor-circle.white {
+  color: whiteSmoke; // Already white smoke
+}
+
+.fade-out {
+  animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.main-container {
+  display: flex;
+  width: 100%;
+}
+
+.dots-container {
+  width: 800px;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 20px;
+}
+
+#dotContainer {
+  position: absolute;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dots {
+  width: 800px;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 20px;
+}
+
+.box-dot {
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  background-color: whiteSmoke; // Update dot color
+  transition: transform 0.1s ease-in;
+}
+
+.moving {
+  width: 50px;
+}
+
+#lineCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.const-label-container {
+  margin-left: 400px;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+}
+
+.bracket {
+  width: 30px;
+  height: 80vh;
+  border-top: 2px whiteSmoke solid;
+  border-bottom: 2px whiteSmoke solid;
+  border-right: 2px whiteSmoke solid;
+}
+
+.line {
+  border-top: 2px whiteSmoke solid;
+  width: 30px;
+  margin-bottom: 500px;
+}
+
+.const-info {
+  border-left: 2px whiteSmoke solid;
+  margin-bottom: auto;
+  padding: 20px;
+  margin-top: 10vh;
+}
+
+.const-label {
+  border: 2px solid whiteSmoke;
+  padding: 5px;
+  width: fit-content;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.const-stats {
+  color: whiteSmoke;
+  margin-top: 30px;
+  font-size: 13px;
+}
+
+.status {
+  margin-top: 20px;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Apply to all elements that need the CRT effect */
+.crt-glow {
+  color: whiteSmoke; /* Ensure text is visible */
+  filter: grayscale(100%) contrast(120%) brightness(90%) sepia(10%);
+  animation: crt-flicker 0.1s infinite alternate;
+  text-shadow: 0 0 1px whiteSmoke;
+}
+
+/* Flicker effect */
+@keyframes crt-flicker {
+  0% {
+    filter: grayscale(100%) contrast(120%) brightness(90%) sepia(10%)
+      blur(0.6px);
+  }
+  50% {
+    filter: grayscale(100%) contrast(110%) brightness(85%) sepia(15%)
+      blur(0.85px);
+  }
+  100% {
+    filter: grayscale(100%) contrast(120%) brightness(90%) sepia(10%)
+      blur(0.6px);
+  }
+}
+
+.crt-glow-solid {
+  color: whiteSmoke; /* Ensure text is visible */
+  filter: grayscale(100%) contrast(120%) brightness(90%) sepia(10%);
+  animation: crt-flicker-solid 0.1s infinite alternate;
+  text-shadow: 0 0 1px whiteSmoke;
+}
+
+@keyframes crt-flicker-solid {
+  0% {
+    filter: grayscale(100%) contrast(120%) brightness(90%) sepia(10%)
+      blur(0.6px);
+  }
+  50% {
+    filter: grayscale(100%) contrast(110%) brightness(85%) sepia(15%)
+      blur(0.65px);
+  }
+  100% {
+    filter: grayscale(100%) contrast(120%) brightness(90%) sepia(10%)
+      blur(0.6px);
+  }
+}
+
+.command-box {
+  display: inline-flex;
+  align-items: center;
+  width: 500px;
+  height: 40px;
+  padding: 5px;
+  border-bottom: 1px gray solid;
+}
+
+.command-input {
+  margin-left: 5px;
+  background-color: transparent;
+  border: none;
+  color: whitesmoke;
+  font-family: "IBM Plex Mono", serif;
+  font-size: 16px;
+  width: 200px !important; /* Set a minimum width for the input */
+  padding: 5px;
+  outline: none;
+  white-space: nowrap; /* Prevent text wrapping inside the input */
+  overflow: hidden; /* Hide overflow text */
+  cursor: none;
+}
+
+.command-input::placeholder {
+  color: whitesmoke;
+  opacity: 0.6;
+}
+
+.command-input:focus {
+  outline: none;
+  background-color: transparent;
+}
+
+.console-container {
+  margin-top: 10px;
+  max-width: 500px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.message {
+  margin-top: 10px;
+  margin-left: 5px;
+  padding-bottom: 5px;
+}
+
+#scrambled {
+  opacity: 0.4;
+}
+
+.link-white {
+  text-decoration: none;
+  color: whitesmoke;
+}
+.link-black {
+  text-decoration: none;
+  color: black;
+  cursor: none;
+}
+
+.menu-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dir-container {
+  height: 100%;
+  width: 100%;
+  border: 2px solid whitesmoke;
+}
+
+.folders {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  height: 90%;
+  width: fit-content;
+}
+
+.folder {
+  font-size: 50px;
+  margin-top: auto;
+}
+
+.folder-title {
+  padding-bottom: 10px;
+  text-align: center;
+  margin-top: auto;
+}
+
+.folder-container {
+  width: 100px;
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  height: 120px;
+}
+
+.folder-container:hover {
+  background-color: rgba(245, 245, 245, 0.1);
+  cursor: pointer;
+}
+
+.top-bar {
+  height: 40px;
+  border-bottom: 2px whitesmoke solid;
+  display: flex;
+  align-items: center;
+}
+
+.time {
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+.top-item {
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.top-item:hover {
+  background-color: rgba(245, 245, 245, 0.3);
+}
+
+.window-open {
+  animation: open 0.07s forwards;
+}
+
+@keyframes open {
+  0% {
+    height: 0px;
+  }
+  100% {
+    height: 500px;
+  }
+}
+
+.window {
+  position: absolute;
+  z-index: 9999;
+  border: 2px solid whitesmoke;
+  width: 50%;
+  background-color: rgb(17, 17, 17);
+  opacity: 1;
+  border-radius: 3px;
+  transition: left 0.1s, top 0.1s;
+  max-height: 500px;
+}
+
+.tttW {
+  width: fit-content !important;
+}
+
+.window-body {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 458px;
+}
+
+.infoW {
+  left: 30%;
+  top: 15%;
+}
+
+.bonsaiW {
+  left: 37%;
+  top: 20%;
+  width: 570px;
+}
+
+.projectsW {
+  left: 37%;
+  top: 27%;
+}
+
+.musicW {
+  left: 20%;
+  top: 35%;
+  height: fit-content !important;
+}
+.tttW {
+  left: 30%;
+  top: 35%;
+}
+.paintW {
+  left: 40%;
+  top: 25%;
+}
+
+.close-button {
+  margin-left: auto;
+  margin-right: 10px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.project-link {
+  display: flex;
+  border-bottom: 2px whitesmoke solid;
+  width: 100%;
+  justify-content: space-between;
+  padding-left: 30px;
+  padding-right: 10px;
+  height: 150px;
+  align-items: center;
+}
+
+.project-link:hover {
+  background-color: rgba(245, 245, 245, 0.3);
+}
+
+.proj-desc {
+  width: 400px;
+  margin-left: auto;
+}
+
+.proj-name {
+  font-weight: bold;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-gap: 5px;
+  margin: 20px;
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  border: 2px solid whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.cell.taken {
+  pointer-events: none;
+}
+
+.message {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.reset {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: whitesmoke;
+  border-radius: 8px;
+  background-color: none;
+  cursor: pointer;
+}
+
+.tttBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-header {
+  font-weight: bold;
+  font-size: 30px;
+  margin: 20px;
+  margin-bottom: 0px;
+}
+
+.info-text {
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 15px;
+  opacity: 0.9;
+}
+
+.icon-link {
+  color: whitesmoke;
+  font-size: 30px;
+}
+// .icon-link:hover {
+//   font-size: 40px;
+// }
+
+.info-links {
+  margin-left: 30px;
+  margin-bottom: 20px;
+  height: 50px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#paintCanvas {
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+}
+
+.file-types {
+  width: 100px;
+  font-size: 30px;
+}
+
+#bonsai {
+  margin-top: auto;
+  font-family: "Courier New", Courier, monospace;
+  white-space: pre;
+  word-wrap: break-word;
+  font-size: 16px;
+  text-align: center;
+  line-height: 1.2;
+  text-shadow: 0 0 5px whiteSmoke;
+}
