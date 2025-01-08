@@ -47,7 +47,7 @@ document.body.onpointermove = (event) => {
       left: `${clientX}px`,
       top: `${clientY}px`,
     },
-    { duration: 20, fill: "forwards" }
+    { duration: 0, fill: "forwards" }
   );
 };
 
@@ -289,7 +289,7 @@ const commands = [
   "me",
   "ls",
   "logout",
-  "EMPLOYEE ANOMALY LOGGED",
+  "INPUT ANOMALY LOGGED",
 ];
 
 // Example function that handles the entered command
@@ -331,7 +331,7 @@ function handleCommand(command) {
       for (let i = 0; i < commands.length; i++) {
         setTimeout(() => {
           showHelp(i);
-        }, i * 120);
+        }, i * 100);
       }
       break;
     case "home":
@@ -435,7 +435,7 @@ function consoleMessage(command) {
       consoleMessages.innerHTML = "";
       newMessage = document.createElement("div");
       newMessage.classList.add("message");
-      newMessage.textContent = "TERMINATE EMPLOYEE STATUS? (y/n)";
+      newMessage.textContent = "TERMINATE STATUS? (y/n)";
       consoleMessages.appendChild(newMessage);
       break;
     case "time":
@@ -482,7 +482,7 @@ function consoleMessage(command) {
       newMessage = document.createElement("div");
       newMessage.classList.add("message");
       newMessage.textContent =
-        "UNAUTHORIZED: THE CORE RETAINS RIGHTS TO PERPETUAL BIO-SYNC";
+        "UNAUTHORIZED: THE CORE RETAINS RIGHTS TO PERPETUAL SYNC";
       consoleMessages.appendChild(newMessage);
       break;
     case "stop":
@@ -521,14 +521,14 @@ function consoleMessage(command) {
       consoleMessages.innerHTML = "";
       newMessage = document.createElement("div");
       newMessage.classList.add("message");
-      newMessage.textContent = "LOGOUT PREVENTED BY SYSTEM BIO-SYNC";
+      newMessage.textContent = "LOGOUT PREVENTED BY SYSTEM SYNC";
       consoleMessages.appendChild(newMessage);
       break;
     default:
       consoleMessages.innerHTML = "";
       newMessage = document.createElement("div");
       newMessage.classList.add("message");
-      newMessage.textContent = "UNKNOWN COMMAND - EMPLOYEE ANOMALY LOGGED";
+      newMessage.textContent = "UNKNOWN COMMAND - EXCEPTION LOGGED";
       consoleMessages.appendChild(newMessage);
       break;
   }

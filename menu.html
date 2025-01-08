@@ -91,14 +91,14 @@
               </div>
             </div>
           </div>
-          <div class="window hidden paintW" id="paintWindow">
+          <div class="window hidden paintW crt-glow-solid" id="paintWindow">
             <div class="top-bar">
               <div class="top-item">Paint</div>
               <div class="close-button" id="closePaint">
                 <i class="bi bi-x"></i>
               </div>
             </div>
-            <div class="window-body">
+            <div class="window-body crt-glow-solid">
               <canvas id="paintCanvas"></canvas>
             </div>
           </div>
@@ -227,6 +227,18 @@
               <div class="bonsai crt-glow" id="bonsai"></div>
             </div>
           </div>
+          <div class="window hidden cameraW" id="cameraWindow">
+            <div class="top-bar">
+              <div class="top-item">Camera</div>
+              <div class="close-button" id="closeCamera">
+                <i class="bi bi-x"></i>
+              </div>
+            </div>
+            <div class="window-body">
+              <video id="webcam" autoplay playsinline></video>
+              <pre class="ascii crt-glow-solid" id="ascii"></pre>
+            </div>
+          </div>
           <div class="window hidden tttW" id="tttWindow">
             <div class="top-bar">
               <div class="top-item">Tic-Tac-Toe</div>
@@ -251,8 +263,13 @@
               <div class="folder"><i class="bi bi-file-earmark-text"></i></div>
               <div class="folder-title">Info</div>
             </div>
-            <a class="link-white" target="_blank" alt="Matt Thompson CV" title="Matt Thompson CV"
-            href="resources/Matt-Thompson-CV.pdf">
+            <a
+              class="link-white"
+              target="_blank"
+              alt="Matt Thompson CV"
+              title="Matt Thompson CV"
+              href="resources/Matt-Thompson-CV.pdf"
+            >
               <div class="folder-container" id="cv">
                 <div class="folder"><i class="bi bi-file-earmark-pdf"></i></div>
                 <div class="folder-title">CV.pdf</div>
@@ -265,6 +282,10 @@
             <div class="folder-container" id="music">
               <div class="folder"><i class="bi bi-folder2"></i></div>
               <div class="folder-title">Music</div>
+            </div>
+            <div class="folder-container" id="cameraApp">
+              <div class="folder"><i class="bi bi-camera"></i></div>
+              <div class="folder-title">Camera</div>
             </div>
             <div class="folder-container" id="ttt">
               <div class="folder"><i class="bi bi-terminal"></i></div>

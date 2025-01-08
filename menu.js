@@ -28,9 +28,9 @@ document.addEventListener("DOMContentLoaded", function () {
   function draw(e) {
     if (!painting) return;
 
-    ctx.lineWidth = 10; 
-    ctx.lineCap = "round"; 
-    ctx.strokeStyle = "white"; 
+    ctx.lineWidth = 10;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "white";
 
     const rect = canvas.getBoundingClientRect();
     ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
@@ -64,11 +64,13 @@ const musicFolder = document.getElementById("music");
 const tttApp = document.getElementById("ttt");
 const paintApp = document.getElementById("paint");
 const bonsaiApp = document.getElementById("bonsaiApp");
+const cameraApp = document.getElementById("cameraApp");
 const infoWindow = document.getElementById("infoWindow");
 const projectsWindow = document.getElementById("projectsWindow");
 const musicWindow = document.getElementById("musicWindow");
 const tttWindow = document.getElementById("tttWindow");
 const bonsaiWindow = document.getElementById("bonsaiWindow");
+const cameraWindow = document.getElementById("cameraWindow");
 const timeElement = document.getElementById("time");
 const infoClose = document.getElementById("closeInfo");
 const projClose = document.getElementById("closeProj");
@@ -76,6 +78,7 @@ const musicClose = document.getElementById("closeMusic");
 const tttClose = document.getElementById("closeTtt");
 const paintClose = document.getElementById("closePaint");
 const bonsaiClose = document.getElementById("closeBonsai");
+const cameraClose = document.getElementById("closeCamera");
 
 function setTime() {
   setInterval(() => {
@@ -89,7 +92,9 @@ infoFolder.addEventListener("click", openInfoWindow);
 infoClose.addEventListener("click", openInfoWindow);
 projectsFolder.addEventListener("click", openProjectsWindow);
 tttApp.addEventListener("click", openTttWindow);
+cameraApp.addEventListener("click", openCameraWindow);
 tttClose.addEventListener("click", openTttWindow);
+cameraClose.addEventListener("click", openCameraWindow);
 projClose.addEventListener("click", openProjectsWindow);
 musicFolder.addEventListener("click", openMusicWindow);
 musicClose.addEventListener("click", openMusicWindow);
@@ -117,7 +122,7 @@ function openTttWindow() {
 function openBonsaiWindow() {
   bonsaiWindow.classList.toggle("hidden");
   bonsaiWindow.classList.add("window-open");
-  if(bonsaiHeight == 0) {
+  if (bonsaiHeight == 0) {
     growBonsai();
   }
 }
@@ -129,12 +134,9 @@ function openPaintWindow() {
   canvas.height = canvas.offsetHeight;
 }
 
-
 const windows = document.querySelectorAll(".window");
 
-
 let highestZIndex = 100;
-
 
 windows.forEach((win) => {
   const topBar = win.querySelector(".top-bar");
@@ -142,22 +144,17 @@ windows.forEach((win) => {
   let isDragging = false;
   let offsetX, offsetY;
 
-  
   topBar.addEventListener("mousedown", (e) => {
     isDragging = true;
 
-    
     win.style.zIndex = ++highestZIndex;
 
-    
     offsetX = e.clientX - win.offsetLeft;
     offsetY = e.clientY - win.offsetTop;
 
-    
     win.classList.add("dragging");
   });
 
-  
   document.addEventListener("mousemove", (e) => {
     if (isDragging) {
       win.style.left = `${e.clientX - offsetX}px`;
@@ -165,7 +162,6 @@ windows.forEach((win) => {
     }
   });
 
-  
   document.addEventListener("mouseup", () => {
     if (isDragging) {
       isDragging = false;
@@ -179,11 +175,10 @@ windows.forEach((win) => {
 });
 
 const TicTac = {
-  cPlayer: "X", 
-  state: Array(9).fill(null), 
-  gameOver: false, 
+  cPlayer: "X",
+  state: Array(9).fill(null),
+  gameOver: false,
 
-  
   init() {
     this.cBoard();
     document
@@ -200,36 +195,30 @@ const TicTac = {
       cell.dataset.index = i;
       board.appendChild(cell);
     });
-    board.addEventListener("click", (e) => this.handleClick(e)); 
+    board.addEventListener("click", (e) => this.handleClick(e));
     this.uMessage(`${this.cPlayer}'s turn`);
 
-    
     if (this.cPlayer === "O") {
       this.computerMove();
     }
   },
 
-  
   handleClick(e) {
     const cell = e.target;
     const i = cell.dataset.index;
 
-    
     if (this.gameOver || !cell.classList.contains("cell") || this.state[i])
       return;
 
-    
     this.makeMove(i);
   },
 
-  
   makeMove(i) {
     this.state[i] = this.cPlayer;
     const cell = document.querySelector(`.cell[data-index="${i}"]`);
     cell.textContent = this.cPlayer;
     cell.classList.add("taken");
 
-    
     const winCombo = this.checkWin();
     if (winCombo) {
       this.highlight(winCombo);
@@ -239,28 +228,24 @@ const TicTac = {
       this.uMessage("It's a tie!");
       this.gameOver = true;
     } else {
-      
       this.cPlayer = this.cPlayer === "X" ? "O" : "X";
       this.uMessage(`${this.cPlayer}'s turn`);
 
-      
       if (this.cPlayer === "O" && !this.gameOver) {
         this.computerMove();
       }
     }
   },
 
-  
   computerMove() {
-    let bestScore = -Infinity; 
+    let bestScore = -Infinity;
     let bestMove;
 
-    
     this.state.forEach((cell, index) => {
       if (cell === null) {
-        this.state[index] = "O"; 
-        const score = this.minimax(false); 
-        this.state[index] = null; 
+        this.state[index] = "O";
+        const score = this.minimax(false);
+        this.state[index] = null;
         if (score > bestScore) {
           bestScore = score;
           bestMove = index;
@@ -268,49 +253,44 @@ const TicTac = {
       }
     });
 
-    
-    setTimeout(() => this.makeMove(bestMove), 200); 
+    setTimeout(() => this.makeMove(bestMove), 200);
   },
 
-  
   minimax(isMaximizing) {
     const winCombo = this.checkWin();
 
-    
     if (winCombo) {
       const winner = this.state[winCombo[0]];
-      return winner === "O" ? 10 : -10; 
+      return winner === "O" ? 10 : -10;
     }
-    if (this.state.every((cell) => cell)) return 0; 
+    if (this.state.every((cell) => cell)) return 0;
 
-    
     let bestScore = isMaximizing ? -Infinity : Infinity;
 
     this.state.forEach((cell, index) => {
       if (cell === null) {
-        this.state[index] = isMaximizing ? "O" : "X"; 
-        const score = this.minimax(!isMaximizing); 
-        this.state[index] = null; 
+        this.state[index] = isMaximizing ? "O" : "X";
+        const score = this.minimax(!isMaximizing);
+        this.state[index] = null;
         bestScore = isMaximizing
           ? Math.max(bestScore, score)
-          : Math.min(bestScore, score); 
+          : Math.min(bestScore, score);
       }
     });
 
     return bestScore;
   },
 
-  
   checkWin() {
     const wins = [
       [0, 1, 2],
       [3, 4, 5],
-      [6, 7, 8], 
+      [6, 7, 8],
       [0, 3, 6],
       [1, 4, 7],
-      [2, 5, 8], 
+      [2, 5, 8],
       [0, 4, 8],
-      [2, 4, 6], 
+      [2, 4, 6],
     ];
     return wins.find((combo) =>
       combo.every(
@@ -319,14 +299,12 @@ const TicTac = {
     );
   },
 
-  
   highlight(combo) {
     combo.forEach((i) => {
       document.getElementById("board").children[i].style.color = "red";
     });
   },
 
-  
   reset() {
     this.state = Array(9).fill(null);
     this.cPlayer = "X";
@@ -334,7 +312,6 @@ const TicTac = {
     this.cBoard();
   },
 
-  
   uMessage(msg) {
     document.getElementById("message").textContent = msg;
   },
@@ -367,7 +344,12 @@ let bonsaiBranches = [
   "    ## (/_###",
 ];
 
-let bonsaiTree = ["          {}{      ", "      }{{", "      ,'  ) .",  "      ,'   '  `,"];
+let bonsaiTree = [
+  "          {}{      ",
+  "      }{{",
+  "      ,'  ) .",
+  "      ,'   '  `,",
+];
 
 const bonsaiElement = document.getElementById("bonsai");
 
@@ -398,4 +380,115 @@ function growBonsai() {
   }
 }
 
-setInterval(growBonsai, 20000);
+setInterval(growBonsai, 40000);
+
+const videoElement = document.getElementById("webcam");
+const asciiElement = document.getElementById("ascii");
+
+// ASCII characters from darkest to lightest
+const asciiChars = " .:-=*%@#§";
+
+// Variables for motion blur
+let previousBrightness = []; // Stores the previous frame's brightness values
+const blurAmount = 0; // Adjust between 0 (no blur) and 1 (maximum blur)
+
+// State for webcam
+let isCameraActive = false;
+let videoStream = null;
+
+// Function to toggle webcam
+async function openCameraWindow() {
+  cameraWindow.classList.toggle("hidden");
+  cameraWindow.classList.add("window-open");
+  if (isCameraActive) {
+    // Stop the webcam
+    const tracks = videoStream.getTracks();
+    tracks.forEach((track) => track.stop());
+    videoStream = null;
+    videoElement.srcObject = null;
+    isCameraActive = false;
+    asciiElement.textContent = ""; // Clear ASCII art when camera is off
+    console.log("Webcam turned off");
+  } else {
+    // Start the webcam
+    try {
+      videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
+      videoElement.srcObject = videoStream;
+      isCameraActive = true;
+      console.log("Webcam turned on");
+
+      // Process the video feed
+      videoElement.addEventListener("play", () => {
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+
+        const processFrame = () => {
+          if (!isCameraActive) return; // Stop processing if the camera is turned off
+
+          // Set canvas size to match video
+          canvas.width = 100; // Small width for ASCII effect
+          canvas.height = (videoElement.videoHeight / videoElement.videoWidth) * canvas.width;
+
+          // Flip the canvas horizontally
+          context.save();
+          context.scale(-1, 1);
+          context.translate(-canvas.width, 0);
+
+          // Draw video frame to canvas
+          context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+          context.restore();
+
+          // Get pixel data
+          const imageData = context.getImageData(0, 0, canvas.width, canvas.height).data;
+
+          // Convert pixel data to brightness values
+          const currentBrightness = [];
+          for (let y = 0; y < canvas.height; y++) {
+            for (let x = 0; x < canvas.width; x++) {
+              const offset = (y * canvas.width + x) * 4;
+              const r = imageData[offset];
+              const g = imageData[offset + 1];
+              const b = imageData[offset + 2];
+
+              // Convert RGB to brightness (grayscale)
+              const brightness = (r + g + b) / 3;
+              currentBrightness.push(brightness);
+            }
+          }
+
+          // Blend current frame with previous frame for motion blur
+          const blendedBrightness = currentBrightness.map((brightness, index) => {
+            const previous = previousBrightness[index] || brightness;
+            return blurAmount * previous + (1 - blurAmount) * brightness;
+          });
+
+          // Save the blended brightness for the next frame
+          previousBrightness = blendedBrightness;
+
+          // Convert brightness values to ASCII
+          let asciiString = "";
+          for (let y = 0; y < canvas.height; y++) {
+            for (let x = 0; x < canvas.width; x++) {
+              const index = y * canvas.width + x;
+              const brightness = blendedBrightness[index];
+              const charIndex = Math.floor((brightness / 255) * (asciiChars.length - 1));
+              asciiString += asciiChars[charIndex];
+            }
+            asciiString += "\n"; // New line after each row
+          }
+
+          // Display ASCII art
+          asciiElement.textContent = asciiString;
+
+          // Repeat processing for the next frame
+          requestAnimationFrame(processFrame);
+        };
+
+        processFrame();
+      });
+    } catch (error) {
+      console.error("Error accessing webcam: ", error);
+      alert("Unable to access webcam. Please ensure it's not in use or blocked by the browser.");
+    }
+  }
+}

@@ -255,13 +255,13 @@ body {
 
 @keyframes crt-flicker-solid {
   0% {
-    filter: grayscale(100%) contrast(120%) brightness(90%) sepia(10%) blur(0.6px);
+    filter: grayscale(100%) contrast(120%) brightness(90%) sepia(10%) blur(0.7px);
   }
   50% {
-    filter: grayscale(100%) contrast(110%) brightness(85%) sepia(15%) blur(0.65px);
+    filter: grayscale(100%) contrast(110%) brightness(90%) sepia(15%) blur(0.65px);
   }
   100% {
-    filter: grayscale(100%) contrast(120%) brightness(90%) sepia(10%) blur(0.6px);
+    filter: grayscale(100%) contrast(120%) brightness(90%) sepia(10%) blur(0.7px);
   }
 }
 .command-box {
@@ -454,6 +454,11 @@ body {
   top: 27%;
 }
 
+.cameraW {
+  left: 17%;
+  top: 27%;
+}
+
 .musicW {
   left: 20%;
   top: 35%;
@@ -595,4 +600,44 @@ body {
   text-align: center;
   line-height: 1.2;
   text-shadow: 0 0 5px whiteSmoke;
+}
+
+.ascii {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  background: #000;
+  color: whitesmoke;
+  font-family: monospace;
+  overflow: hidden;
+  line-height: 10px;
+}
+
+video {
+  display: none;
+}
+
+.emphasis {
+  font-weight: bold;
+}
+
+.tech-items {
+  min-width: 200px;
+  display: flex;
+  gap: 20px;
+  margin: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.tech-item {
+  border: 2px whitesmoke solid;
+  padding: 5px;
+}
+
+.technologies-section {
+  margin-top: 20px;
 }/*# sourceMappingURL=main.css.map */
